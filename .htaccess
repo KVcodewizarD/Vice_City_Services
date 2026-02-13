@@ -1,0 +1,25 @@
+# Enable mod_rewrite (if using Apache)
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    
+    # Redirect to index.php if file/directory doesn't exist
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    # RewriteRule ^(.*)$ index.php/$1 [L]
+</IfModule>
+
+# Prevent directory browsing
+Options -Indexes
+
+# Disable display of errors in production
+# php_flag display_errors off
+
+# Set default charset
+AddDefaultCharset UTF-8
+
+# Protect config files
+<FilesMatch "^(db\.php|config\.php)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
